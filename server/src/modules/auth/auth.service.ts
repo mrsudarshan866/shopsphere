@@ -5,6 +5,7 @@ export const createUser = async (
   name: string,
   email: string,
   password: string,
+  role: "user" | "admin",
 ) => {
   const existingUser = await User.findOne({ email });
 
@@ -18,6 +19,7 @@ export const createUser = async (
     name,
     email,
     password,
+    role,
   });
 
   return user;

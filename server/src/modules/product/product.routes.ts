@@ -6,6 +6,7 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  createBulkProduct
 } from "./product.controller";
 
 import { protect } from "../../middlewares/auth.middleware";
@@ -16,7 +17,11 @@ const router = Router();
 
 router.get("/", getProducts);
 
+
+
 router.get("/:id", getProductById);
+
+// router.post("/bulk", createBulkProduct);
 
 router.post("/", protect, authorize("admin"), createProduct);
 

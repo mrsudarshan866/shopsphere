@@ -1,15 +1,23 @@
+import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import AdminSidebar from "../components/admin/Sidebar";
 
 const AdminLayout = () => {
   return (
-    <div className="flex min-h-screen">
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <AdminSidebar />
 
-      <div className="flex-1 bg-gray-100 p-6">
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 4,
+          bgcolor: "background.default",
+        }}
+      >
         <Outlet />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

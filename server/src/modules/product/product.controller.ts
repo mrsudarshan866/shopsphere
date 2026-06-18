@@ -11,6 +11,17 @@ export const createProduct = async (req: Request, res: Response) => {
   });
 };
 
+export const createBulkProduct = async (req: Request, res: Response) => {
+  console.log(req.body)
+  const products = await ProductService.createBulkProduct(req.body);
+
+  res.status(201).json({
+    success: true,
+    count: products.length,
+    data: products,
+  });
+};
+
 export const getProducts = async (req: Request, res: Response) => {
   const products = await ProductService.getProductsService(req.query);
 

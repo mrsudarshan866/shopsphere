@@ -24,28 +24,21 @@ const AppRoutes = () => {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
-
         <Route path="/login" element={<LoginPage />} />
-
         <Route path="/register" element={<RegisterPage />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
         <Route path="/cart" element={<CartPage />} />
-
         <Route path="/checkout" element={<CheckoutPage />} />
       </Route>
 
       <Route element={<AdminRoute />}>
         <Route element={<AdminLayout />}>
           <Route path="/admin" element={<DashboardPage />} />
-
           <Route path="/admin/products" element={<ProductsPage />} />
-
           <Route path="/admin/orders" element={<OrdersPage />} />
-
           <Route path="/admin/users" element={<UsersPage />} />
-
           <Route path="/admin/categories" element={<CategoriesPage />} />
         </Route>
       </Route>

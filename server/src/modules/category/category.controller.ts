@@ -18,6 +18,22 @@ export const createCategory = async (req: Request, res: Response) => {
   }
 };
 
+export const createBulkCategory = async (req: Request, res: Response) => {
+  try {
+    const categorys = await CategoryService.createBulkCategoryService(req.body);
+
+    res.status(201).json({
+      success: true,
+      data: categorys,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const getCategories = async (req: Request, res: Response) => {
   const categories = await CategoryService.getCategoriesService();
 

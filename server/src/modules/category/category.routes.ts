@@ -7,6 +7,7 @@ import {
   updateCategory,
   deleteCategory,
   getCategoryStats,
+  createBulkCategory
 } from "./category.controller";
 
 import { protect } from "../../middlewares/auth.middleware";
@@ -22,6 +23,7 @@ router.get("/stats", protect, authorize("admin"), getCategoryStats);
 router.get("/:id", getCategoryById);
 
 router.post("/", protect, authorize("admin"), createCategory);
+// router.post("/bulk", createBulkCategory);
 
 router.put("/:id", protect, authorize("admin"), updateCategory);
 

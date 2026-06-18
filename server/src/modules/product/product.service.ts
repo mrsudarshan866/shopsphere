@@ -63,6 +63,12 @@ export const createProductService = async (payload: any) => {
   return Product.create(payload);
 };
 
+export const createBulkProduct = async (payload: any) => {
+  const products = payload;
+
+  return Product.insertMany(products);
+};
+
 export const getProductByIdService = async (id: string) => {
   return Product.findById(id).populate("category");
 };

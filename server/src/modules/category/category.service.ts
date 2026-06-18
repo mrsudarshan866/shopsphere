@@ -22,6 +22,29 @@ export const createCategoryService = async (payload: any) => {
   });
 };
 
+export const createBulkCategoryService = async (payload: any[]) => {
+  const categories = payload.map((category) => ({
+    ...category,
+    slug: slugify(category.name, { lower: true }),
+  }));
+
+  const slugs = categories.map((c) => c.slug);
+
+  const existing = await Category.find({
+    slug: { $in: slugs },
+  });
+
+  if (existing.length > 0) {
+    throw new Error(
+      `Categories already exist: ${existing
+        .map((c) => c.name)
+        .join(", ")}`
+    );
+  }
+
+  return Category.insertMany(categories);
+};
+
 export const getCategoriesService = async () => {
   const categories = await Category.find().sort({
     createdAt: -1,

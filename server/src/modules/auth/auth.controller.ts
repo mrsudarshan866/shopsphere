@@ -7,9 +7,9 @@ import { User } from "../user/user.model";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
-    const user = await createUser(name, email, password);
+    const user = await createUser(name, email, password, role);
 
     res.status(201).json({
       success: true,

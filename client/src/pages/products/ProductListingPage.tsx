@@ -23,6 +23,7 @@ const ProductsListingPage = () => {
         <ProductFilters category={category} setCategory={setCategory} />
 
         <div>
+          {data}
           <ProductGrid products={data?.data || []} />
 
           <Pagination
