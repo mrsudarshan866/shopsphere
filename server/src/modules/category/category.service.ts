@@ -1,0 +1,71 @@
+import slugify from "slugify";
+
+import Category from "./category.model";
+import Product from "../product/product.model";
+
+export const createCategoryService = async (payload: any) => {
+  const slug = slugify(payload.name, {
+    lower: true,
+  });
+
+  const exists = await Category.findOne({
+    slug,
+  });
+
+  if (exists) {
+    throw new Error("Category already exists");
+  }
+
+  return Category.create({
+    ...payload,
+    slug,
+  });
+};
+
+export const getCategoriesService = async () => {
+  const categories = await Category.find().sort({
+    createdAt: -1,
+  });
+
+  return categories;
+};
+
+export const getCategoryByIdService = async (id: string) => {
+  return Category.findById(id);
+};
+
+export const updateCategoryService = async (id: string, payload: any) => {
+  const slug = slugify(payload.name, {
+    lower: true,
+  });
+
+  return Category.findByIdAndUpdate(
+    id,
+    {
+      ...payload,
+      slug,
+    },
+    {
+      new: true,
+    },
+  );
+};
+
+export const deleteCategoryService = async (id: string) => {
+  return Category.findByIdAndDelete(id);
+};
+
+export const getCategoryStatsService = async () => {
+  const stats = await Product.aggregate([
+    {
+      $group: {
+        _id: "$category",
+        totalProducts: {
+          $sum: 1,
+        },
+      },
+    },
+  ]);
+
+  return stats;
+};
