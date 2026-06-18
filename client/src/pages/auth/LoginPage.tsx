@@ -17,7 +17,12 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
+import {
+  Visibility,
+  VisibilityOff,
+  LockOutlined,
+  Close,
+} from "@mui/icons-material";
 
 interface LoginFormValues {
   email: string;
@@ -71,31 +76,57 @@ const LoginPage = () => {
         <Card
           elevation={8}
           sx={{
-            width: "100%",
-            borderRadius: 4,
+            width: "70%",
+            borderRadius: 8,
           }}
         >
-          <CardContent sx={{ p: 5 }}>
-            <Box>
+          <CardContent sx={{ p: 3 }}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "7px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <LockOutlined
                 sx={{
-                  fontSize: 50,
-                  color: "primary.main",
+                  fontSize: 20,
+                  color: "red",
                   mb: 1,
                 }}
               />
 
-              <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
-                Welcome Back
-              </Typography>
-
-              <Typography color="text.secondary">
-                Login to your account
+              <Typography variant="h6" sx={{ fontWeight: "bold" }} gutterBottom>
+                Welcome
               </Typography>
             </Box>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              Login to your account
+            </Typography>
 
             {errorMessage && (
-              <Alert severity="error" sx={{ mb: 3 }}>
+              <Alert
+                severity="error"
+                sx={{ mb: 1, mt: 1 }}
+                action={
+                  <IconButton
+                    color="inherit"
+                    size="small"
+                    onClick={() => setErrorMessage("")}
+                  >
+                    <Close fontSize="inherit" />
+                  </IconButton>
+                }
+              >
                 {errorMessage}
               </Alert>
             )}
@@ -110,6 +141,24 @@ const LoginPage = () => {
                 })}
                 error={!!errors.email}
                 helperText={errors.email?.message}
+                size="small"
+                sx={{
+                  "& .MuiInputBase-input": {
+                    fontSize: "12px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    fontSize: "12px",
+                  },
+                  "& input:-webkit-autofill": {
+                    WebkitBoxShadow: "0 0 0 100px transparent inset",
+                    WebkitTextFillColor: "#fff",
+                    transition: "background-color 5000s ease-in-out 0s",
+                  },
+                  "& .MuiFormHelperText-root": {
+                    fontSize: "8px",
+                    fontWeight: 400,
+                  },
+                }}
               />
 
               <TextField
@@ -120,6 +169,23 @@ const LoginPage = () => {
                 {...register("password", {
                   required: "Password is required",
                 })}
+                sx={{
+                  "& .MuiInputBase-input": {
+                    fontSize: "12px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    fontSize: "12px",
+                  },
+                  "& input:-webkit-autofill": {
+                    WebkitBoxShadow: "0 0 0 100px transparent inset",
+                    WebkitTextFillColor: "#fff",
+                    transition: "background-color 5000s ease-in-out 0s",
+                  },
+                  "& .MuiFormHelperText-root": {
+                    fontSize: "8px",
+                    fontWeight: 400,
+                  },
+                }}
                 error={!!errors.password}
                 helperText={errors.password?.message}
                 slotProps={{
@@ -129,23 +195,28 @@ const LoginPage = () => {
                         <IconButton
                           onClick={() => setShowPassword(!showPassword)}
                         >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                          {showPassword ? (
+                            <VisibilityOff sx={{ fontSize: "18px" }} />
+                          ) : (
+                            <Visibility sx={{ fontSize: "18px" }} />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
                   },
                 }}
+                size="small"
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                size="large"
+                size="small"
                 disabled={isLoading}
                 sx={{
-                  mt: 3,
-                  py: 1.5,
+                  mt: 2,
+                  py: 1,
                   borderRadius: 2,
                 }}
               >

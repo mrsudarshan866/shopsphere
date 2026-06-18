@@ -1,17 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
-// import Footer from "../components/layout/Footer";
 
 const MainLayout = () => {
+  const location = useLocation();
+  const hideNavbarRoutes = ["/login", "/register"];
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+
   return (
     <>
-      <Navbar />
-
-      <main className="min-h-screen">
+      {showNavbar && <Navbar />}
+      <main
+        style={{
+          minHeight: showNavbar ? "calc(100vh - 64px)" : "100vh",
+        }}
+      >
         <Outlet />
       </main>
-
-      {/* <Footer /> */}
     </>
   );
 };
