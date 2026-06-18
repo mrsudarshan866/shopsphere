@@ -7,7 +7,7 @@ export const getDashboardStats = async () => {
 };
 
 export const getProducts = async () => {
-  const response = await api.get("/admin/products");
+  const response = await api.get("/products");
 
   return response.data;
 };

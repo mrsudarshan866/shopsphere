@@ -1,16 +1,44 @@
+import { Grid, Typography, Box } from "@mui/material";
 import ProductCard from "./ProductCard";
 
+interface Product {
+  _id: string;
+  name: string;
+  images?: {
+    url: string;
+  }[];
+}
+
 interface Props {
-  products: any[];
+  products: Product[];
 }
 
 const ProductGrid = ({ products }: Props) => {
+  if (!products || products.length === 0) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          py: 8,
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          No products found.
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <Grid container spacing={2}>
       {products.map((product) => (
-        <ProductCard key={product._id} product={product} />
+        <Grid sx={{width: 290, border: "0.5px solid grey", borderRadius: "20px", overflow: "hidden"}} key={product._id}>
+          <ProductCard product={product} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 

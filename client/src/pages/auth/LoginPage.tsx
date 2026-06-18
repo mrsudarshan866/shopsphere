@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../../features/auth/authApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   Box,
@@ -226,6 +226,31 @@ const LoginPage = () => {
                   "Login"
                 )}
               </Button>
+
+              <Typography
+                variant="caption"
+                align="center"
+                sx={{
+                  mt: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "7px",
+                }}
+                color="text.secondary"
+              >
+                Don't have an account?{" "}
+                <Link
+                  to="/register"
+                  style={{
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    color: "white",
+                  }}
+                >
+                  Register
+                </Link>
+              </Typography>
             </form>
           </CardContent>
         </Card>
