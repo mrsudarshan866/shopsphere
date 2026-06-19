@@ -23,6 +23,7 @@ import {
   LockOutlined,
   Close,
 } from "@mui/icons-material";
+import { useAuth } from "../../hooks/useAuth";
 
 interface LoginFormValues {
   email: string;
@@ -31,6 +32,7 @@ interface LoginFormValues {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
   const [login, { isLoading }] = useLoginMutation();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -53,6 +55,7 @@ const LoginPage = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
+      setUser(response.user);
       if (user.role === "admin") {
         navigate("/admin");
       } else {

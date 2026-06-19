@@ -13,12 +13,13 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { items } = useCart();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
     <AppBar

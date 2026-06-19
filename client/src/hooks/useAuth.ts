@@ -1,34 +1,20 @@
-// import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useMemo } from "react";
 
-// import { getProfile } from "../services/auth.service";
-
-// import { setUser } from "../features/auth/authSlice";
-
-// import { useAppDispatch } from "./redux";
-
-// export const useAuth = () => {
-//   const dispatch = useAppDispatch();
-
-//   useEffect(() => {
-//     async function init() {
-//       try {
-//         const response = await getProfile();
-
-//         dispatch(setUser(response.data));
-//       } catch {}
-//     }
-
-//     init();
-//   }, [dispatch]);
-// };
-
-import { useSelector } from "react-redux";
-import { type RootState } from "../app/store";
+import type { RootState, AppDispatch } from "../app/store";
+import { setUser, logout } from "../features/auth/authSlice";
 
 export const useAuth = () => {
-  const auth = useSelector(
-    (state: RootState) => state.auth
-  );
+  const dispatch = useDispatch<AppDispatch>();
 
-  return auth;
+  const auth = useSelector((state: RootState) => state.auth);
+
+  return useMemo(
+    () => ({
+      ...auth,
+      setUser: (user: any) => dispatch(setUser(user)),
+      logout: () => dispatch(logout()),
+    }),
+    [auth, dispatch],
+  );
 };
